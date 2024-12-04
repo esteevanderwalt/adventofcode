@@ -26,19 +26,16 @@ def validate_x_shape(array, x, y):
     if x - 1 < 0 or x + 1 >= rows or y - 1 < 0 or y + 1 >= cols:
         return 0
 
+    d = [array[x - 1][y - 1], array[x + 1][y + 1], array[x + 1][y - 1], array[x - 1][y + 1]]
     # Validate the X-shape pattern
     if (
-        (array[x - 1][y - 1] == 'M' and array[x + 1][y + 1] == 'S' and
-            array[x + 1][y - 1] == 'M' and array[x - 1][y + 1] == 'S')
+        (d[0] == 'M' and d[1] == 'S' and d[2] == 'M' and d[3] == 'S')
         or
-        (array[x - 1][y - 1] == 'S' and array[x + 1][y + 1] == 'M' and
-            array[x + 1][y - 1] == 'S' and array[x - 1][y + 1] == 'M')
+        (d[0] == 'S' and d[1] == 'M' and d[2] == 'S' and d[3] == 'M')
         or
-        (array[x - 1][y - 1] == 'M' and array[x + 1][y + 1] == 'S' and
-            array[x + 1][y - 1] == 'S' and array[x - 1][y + 1] == 'M')
+        (d[0] == 'M' and d[1] == 'S' and d[2] == 'S' and d[3] == 'M')
         or
-        (array[x - 1][y - 1] == 'S' and array[x + 1][y + 1] == 'M' and
-            array[x + 1][y - 1] == 'M' and array[x - 1][y + 1] == 'S')
+        (d[0] == 'S' and d[1] == 'M' and d[2] == 'M' and d[3] == 'S')
     ):
         return 1
 
