@@ -11,6 +11,9 @@
 
 # However, the new challenge is to introduce a new obstruction in such a way that the guard will get stuck in a loop, making the rest of the lab safe to search.
 
+# issue with code - use only the guard path to check as it will save time 
+# only place new obstacles from current position onwards otherwise you are blocking 
+
 import copy
 
 def read_grid_from_file(file_path):
