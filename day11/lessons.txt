@@ -1,0 +1,1 @@
+use the Counter object in python to batch operations that are the same
