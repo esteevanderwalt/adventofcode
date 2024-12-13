@@ -1,0 +1,6 @@
+Yay, linear algebra! (13_01c)
+As a mathematician this one was pretty easy for me compared to yesterday's. 
+Basically just set up a system of equations and check the determinant, 
+since we need integer solutions we also check that the targets are divisible by determinant. 
+
+For part 2 just manipulate the targets slightly. Code runs pretty much instantly, sub 10 ms
