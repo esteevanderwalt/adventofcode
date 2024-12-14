@@ -4,3 +4,25 @@ Basically just set up a system of equations and check the determinant,
 since we need integer solutions we also check that the targets are divisible by determinant. 
 
 For part 2 just manipulate the targets slightly. Code runs pretty much instantly, sub 10 ms
+
+
+----
+I figured we got a Chinese Remainder problem today, turns out not to be the case though, but I did get a lot of use out of the modulo operator. 
+My Part 1 code is a dumb brute force, I set up a function to take the six variables and iterated over every number of 
+A button presses you can do and checks if you can also press B a finite number or times to get the right coordinates, 
+stopping if the number of A presses runs over the X or Y coordinate or if the A buttons alone would cost more than the lowest cost 
+solution so far. I had some flow issues where the function wouldn't return anything if it ran through the entire possible number of 
+A presses without finding anything but increasing the range fixed it.
+
+This code did not even remotely work for Part 2, so I started writing a new function that would go faster by skipping dozens of 
+presses at a time based on the CRT but it ended up being unnecessary, I did some quick algebra to see if you could derive the number 
+of A and B presses just from the initial variables and it turns out you can. I just had to make sure that the equations would result 
+in whole numbers at each step but otherwise this worked. I had a bug where I assumed that if the number of B presses was a whole integer 
+then the math would also result in the number of A presses as a whole integer too, this ended up being correct for all but one entry 
+where the AX and AY variables happened to be the same, I don't know if that was what caused the issue but I don't care, I just added 
+another check to make sure the number of A presses was also a whole integer and got the points.
+
+After I finished I saw a lot of memes and other submissions talking about linear algebra and matrices, I didn't need any of that, 
+this was the extent of the math I needed. But hey, if I could solve day 24 of last year without linear algebra I can do this one too.
+
+
