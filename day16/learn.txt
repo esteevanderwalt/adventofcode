@@ -1,0 +1,111 @@
+Explanation of Changes for 2:
+Visited dictionary: The visited dictionary stores the minimum g_cost for each position (x, y). 
+If we revisit a position and the new cost is higher, we discard that path early. This avoids processing paths that lead to suboptimal solutions.
+
+Priority queue pruning: By adding a check to skip states that have already been visited with a cheaper or equal cost (if (x, y) 
+in visited and visited[(x, y)] <= g_cost), we ensure that we're not wasting time exploring paths that are worse than already found paths.
+
+Pruning based on cost: The condition if g_cost > min_cost ensures that we stop exploring any path whose cost is already worse than the current best known solution.
+
+
+
+Fun fact: complex numbers do not work with heapq (for a very simple reason: tuples cannot contain incomparable elements, and complex numbers cannot be compared). So, you either use tuples for coordinates or write a custom compare function for heap push
+
+
+
+_b solution
+
+
+Computing both answers in a single loop: we keep track of our score and our path. If we reach the end position and our score is optimal (i.e. we did not take a detour), we add the tiles in our path to the set of tiles for part 2.
+On to the Python trick of the day: more and more people are starting to use complex numbers for grid puzzles, and they might have hit a roadblock when using them in a priority queue.
+Suppose you have a queue of (score, position) tuples. As long as the scores are unique, they can fully determine the order of the queue. But when there are duplicate scores (which can easily happen today), Python wants to sort on the second element, position.
+Since complex numbers can't be sorted (1+9j isn't necessarily "less" than 2+2j), Python throws an error:
+
+TypeError: '<' not supported between instances of 'complex' and 'complex'
+There are a few ways to mitigate this:
+
+write your own complex number class, inheriting from the built-in complex but redefining less-than (u/xelf did this here),
+
+store the number as a string, and "re-hydrate" it to complex upon retrieval (u/atreju3647 did this here),
+
+store the real and imaginary parts separately, and combine them upon retrieval (u/TiCoinCoin did this here),
+
+when inserting to the priority queue, add a "tie-breaker" to your tuple. So (score, position) becomes (score, t, position), where t is a unique value. This can be a random number, or an ever incrementing value.
+
+Here's a simple example:
+
+from heapq import heappush, heappop
+
+Q = [(1, i:=0, complex(1))]
+for x in [2,3]:
+    heappush(Q, (x, i := i+1, complex(x,x)))
+When extracting values from the queue, just ignore the tie-breaker:
+
+x, _, v = heappop(Q)
+If anyone has questions, suggestions or other solutions, feel free to let me know!
+
+
+
+xelf
+•
+39m ago
+•
+Thanks for the mention! I'd actually originally done it like TiCoinCoin and broke them into real/imag pairs and then rebuilt them, but I didn't like having to rebuild them. You have the same issue with str where you have to rebuild them. So I made a sortable complex class.
+
+I really like the idea of adding in a dummy value to prevent the sort from seeing the complex numbers. Very nice.
+
+
+
+u/Professional-Top8329 avatar
+Professional-Top8329
+•
+41m ago
+•
+The code outputs
+
+1000000000.0 1
+
+for me. not sure what's wrong but it doesn't work for my test case.
+
+
+
+
+u/4HbQ avatar
+4HbQ
+•
+20m ago
+•
+I made some assumptions about the input that apparently didn't hold. Updated the code linked above, should be fixed now.
+
+
+
+TiCoinCoin
+•
+1h ago
+•
+Exactly the issue I ran into (and not for the first time, but I keep forgetting). I chose to insert real and imaginary parts separately and then combine again in complex at each iteration.
+
+
+
+xelf
+•
+37m ago
+•
+That was the way I'd originally handled it, but it felt clunky recombining them. But it did work!
+
+
+
+TiCoinCoin
+•
+31m ago
+•
+yep, looking at other solutions, like inserting them as string seems better option. But as you said, it worked :)
+
+
+
+u/4HbQ avatar
+4HbQ
+•
+1h ago
+•
+That's also a nice solution. I'll add it to the list, thanks!
