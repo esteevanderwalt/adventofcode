@@ -1,0 +1,15 @@
+Just a simple BFS through the grid for part 1, and then in part 2, straight binary search for the index at which the BFS fails.
+
+Binary search is known to cause me a lot of off-by-ones because my brain can't math 
+(this does not bode well for the remaining day problems :D), so I just break out of it once there's at most 3 elements left to test and test them one by one, 
+but otherwise everything has been out of the algorithms textbook.
+
+----
+
+Did part 1 using regular dijsktra, then realised that I could reduce the runtime for part 2 by breaking from dijkstra as soon as the end point was reached. 
+First tried linear search (brute force) for part 2 then implemented binary search
+
+
+----
+
+dijkstras + binary search
