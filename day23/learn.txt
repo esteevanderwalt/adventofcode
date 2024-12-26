@@ -1,0 +1,8 @@
+[LANGUAGE: Python]
+
+Initially thought this was another pathfinding problem (i.e. how many combinations of nodes we can make with a distance 
+of 1 and 2 for a list of given node), wasted a bit of time on that...
+
+P2 was interesting, I ended up building a network (?) of fully connected networks, so finding the largest network would 
+will just be lookup the ones with longest length. 
+I implemented and thought this would run a while, but turns out it can finish in about 300ms :)

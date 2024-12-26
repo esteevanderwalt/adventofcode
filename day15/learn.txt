@@ -1,0 +1,18 @@
+Problem with our solution compared to _b solution....
+
+Comparison of Logic
+The working solution builds chains explicitly:
+
+When moving in a specific direction, it builds a chain of all connected boxes in that direction (starting with the robot).
+It then checks if this chain can move as a whole before performing the movement.
+This avoids intermediate states where only part of the chain moves, preventing errors in logic.
+Our implementation pushes boxes incrementally:
+
+The push_box function moves boxes one step at a time.
+It does not inherently recognize or handle chains of boxes as a unit, leading to inconsistencies.
+Issues in Our Implementation
+Problem: push_box is not chain-aware
+The push_box function processes a single box or a series of adjacent boxes but doesn't consider them as a unified chain.
+When boxes collide with walls or other boxes, the function doesn't halt as expected. Instead, it tries to move individual boxes separately.
+Problem: Movement order
+The robot moves independently, while the boxes move afterward. This separation means the robot may "outpace" or "misalign" itself relative to boxes in certain configurations.

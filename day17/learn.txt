@@ -1,0 +1,33 @@
+python -m cProfile -s cumulative file.py
+
+
+Wow, that was difficult, but very rewarding to finish. Like most people, 
+I started a bruteforce but quickly realised it wasn't going to work. 
+But after some pencil and paper work (and by some I mean a lot), I figured out that you can work backwards - 
+if A_n is the value of the register after the n-th jump, then I only had to test 8*A_n to 8*A_n + 7 and check the output to find A_n-1. 
+Then keep track of the solutions, and work iteratively through them until you get A_0.
+
+solution a and b does not work but the idea was reverse engineering
+
+other solution is about bitwise operations
+
+I couldn't figure out part two when I started, and have gotten back to it later.
+Part one is a direct simulation, implementing the rules as described. Part two is much harder if you have no 
+idea about the how to problem behaves. For my solution I looked at the input program and manually "decompiled" it. 
+You can notice that at the end of the program the last 3 bits of A get removed. So every number the program generates 
+is only dependent on the moves already made, and won't change later. This allows for a simple search of all possible states, 
+from previous valid states. each next state will be a three bit number added to the and of the current number.
+
+I got out my pencil and paper and wrote out each instruction. I was hoping to spot a neat math trick that produces a closed-form solution, 
+but I don't think that it exists due to the truncating division. I implemented my input in Excel and attempted to use Goal Seek. 
+This did not work, but after looking at it for a while I realized that all we need to do is solve for a=0 on the last step. 
+This requires branching: eight previous a values divide down to the next a. I implemented my input a second time as a closure and
+gave it to a depth-first search machine. The DFS returns Some when I've matched b % 8 outputs to the input program, forming the desired quine.
+
+
+Rather than keep the code for every function that I used for part 1, I looked at my input to see what it was doing and rewrote it in Python. 
+It's quite a straightforward loop that reduces the value of A each time.
+My solution uses this to search for a number that will output just the last digit, 
+then based on that the last two digits, and so on up to 16 digits. For each possible solution for the last N digits you only have to 
+check 8 possibilities for solutions for the last N+1 digits, so it's very manageable and runs quickly.
+It has to keep track of multiple branches since some parts of the input can have more than one value and some paths are dead ends.

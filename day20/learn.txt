@@ -1,0 +1,5 @@
+[LANGUAGE: Python]
+
+dijkstra to calculate time from each point and then creating cheat space from all combination x + y = 20. 
+If point was valid it was similar to relaxing to find the saved time. The example gave it away that to get 
+to any position needed to be only one turn

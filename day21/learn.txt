@@ -1,0 +1,22 @@
+Uses DP to fill out table of fewest presses for any leg of any keyboard. 
+I figured between each key you should either move horizontally then vertically, or vise versa. 
+Didn't know which so I just try both.
+
+Neat check for avoiding robot panic: don't move horizontally first if (xf, yi) == KEY_COORDS[' '], 
+and don't move vertically first if (xi, yf) == KEY_COORDS[' ']
+
+
+•
+Profile Badge for the Achievement Top 1% Commenter Top 1% Commenter
+technically you're sharing your input here, which Eric asks us not to so you might want to see if you can scrub that. Neat solution though!
+
+
+•
+The input in the snippet is the sample from the problem statement. That's fine to share, right?
+Thanks for the shout either way
+
+•
+Profile Badge for the Achievement Top 1% Commenter Top 1% Commenter
+Oh.. well haven't paid enough attention then, big sorry for that. 
+I know that having a copy of the puzzle text is also not really liked, 
+but I guess sample inputs alone shouldn't be of any harm... not 100% sure though :D

@@ -1,0 +1,9 @@
+Running in 0.84s wiht Python3.13. Paralelization was leading nowhere in this problem. 
+so I switched instead to vectorization using numpy. It's just like matlab days!
+
+I first build all secret numbers of all buyers using just one matrix op. Then I make diffs, build the diff into 4- sequences, 
+and these are transformed into numbers in base 19. I add an extra "digit" in base 19 corresponding to the buyer. 
+This is a large matrix ,19**4 * len(buyers), but numpy makes easy of this matrix. 
+Using unique I can discard further appearances of repeated sequences, at the end all that's left is 
+multiplying by values and finding the max. 
+I'm sure there's lot of space for improvement by numpy gurus.
